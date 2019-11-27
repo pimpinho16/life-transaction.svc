@@ -1,0 +1,57 @@
+server:
+  port: 1237
+
+spring:
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/life?currentSchema=transactions
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+logging:
+  level:
+    org:
+      springframework:
+        web: WARN
+  path: file-log/${spring.profiles.active}/life-transaction-svc/
+  file: ${logging.path}${hostname}.log
+  size: 1GB
+  maxHistory: 30
+
+service:
+  configuration:
+    http:
+      http-request-timeout: 30000
+      socket-timeout: 30000
+      conn-request-timeout: 30000
+      max-threads: 400
+      max-threads-per-route: 200
+
+hikari:
+  idle-timeout: 600000
+  max-lifetime: 14400000
+  connection-timeout: 900000
+
+log-activator:
+  activate: true 
+
+management:
+  endpoints:
+    web:
+      base-path: / 
+config:
+  account: A
+  loan: L
+  card: C
+  date-format: "dd/mm/yyyy"
+  svc:
+    rest:
+      client-svc:
+        endpoints:
+          is-valid-product: http://localhost:1235/isValidProduct/{idClient}/{idProduct}/{productType}   
+          data: ProductxClientService
