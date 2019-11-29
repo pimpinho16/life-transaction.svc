@@ -1,0 +1,36 @@
+package com.life.exception;
+
+
+
+import org.springframework.http.HttpStatus;
+
+
+public class IntException extends Exception{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private HttpStatus status;
+	private String errorDescription;
+	
+	
+	public IntException(HttpStatus status, String errorDescription) {
+		super();
+		this.status = status;
+		this.errorDescription = errorDescription;
+	}
+	public HttpStatus getStatus() {
+		return status;
+	}
+	public void setStatus(HttpStatus status) {
+		this.status = status;
+	}
+	public String getErrorDescription() {
+		return errorDescription;
+	}
+	public void setErrorDescription(String errorDescription) {
+		this.errorDescription = errorDescription;
+	}
+	
+	
+}
