@@ -1,0 +1,24 @@
+package com.life.exception;
+
+
+import javax.servlet.http.HttpServletResponse;
+
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+	
+	@ExceptionHandler(value = IntException.class)
+    public ResponseEntity<ErrorMessage> exception(HttpServletResponse response, IntException ex) {
+       return new ResponseEntity<>(new ErrorMessage(ex.getErrorDescription()),ex.getStatus());
+    } 
+	
+	
+	
+}
+
+
