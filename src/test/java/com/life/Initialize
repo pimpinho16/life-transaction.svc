@@ -1,0 +1,29 @@
+package com.life
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+public class Initialize {
+
+	private static Logger log;
+
+
+	public Initialize() {
+		this.log = LoggerFactory.getLogger(getClass());
+	}
+
+	public static void initializeVariables(){
+		try {
+			System.setProperty("hostname", InetAddress.getLocalHost().getHostName());
+		} catch (UnknownHostException e) {
+
+			log.error(" Hubo un error en initializeVariables {}, en la línea{}, del método {}",
+					e, e.getStackTrace()[0].getLineNumber(), e.getStackTrace()[0].getMethodName());
+
+		}
+	}
+	
+}
